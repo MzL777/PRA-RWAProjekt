@@ -1,0 +1,97 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="AdminSite.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %></title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+        <%: Scripts.Render("~/bundles/WebFormsJs") %>
+    </asp:PlaceHolder>
+
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <footer>
+                <hr />
+                <p>&copy; Mislav Lalić, RWA&PRA projekt, Visoko Učilište Algebra, <%: DateTime.Now.Year %></p>
+            </footer>
+        </div>
+
+        <!-- Side navigation -->
+        <div class="sidenav">
+            <div class="logo">
+                <asp:Image CssClass="logo" ImageUrl="~/logo.png" runat="server" meta:resourcekey="ImageResource1" />
+            </div>
+            <br />
+            <h2><%=GetLocalResourceObject("TITLE") %></h2>
+            <br />
+            <hr />
+            <a href="Namirnice.aspx"><%=GetLocalResourceObject("titleGroceries") %></a>
+            <a href="MjerneJedinice.aspx"><%=GetLocalResourceObject("titleMeasuringUnits") %></a>
+            <a href="Kombinacije.aspx"><%=GetLocalResourceObject("titleCombinations") %></a>
+            <a href="NaziviObroka"><%=GetLocalResourceObject("titleMealNames") %></a>
+            <a href="Posjetitelji"><%=GetLocalResourceObject("titleUsers") %></a>
+
+            <hr />
+
+            <button class="dropdown-btn">
+                <%=GetLocalResourceObject("btnLanguage") %>
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <asp:LinkButton Text="Engleski" runat="server" OnClick="btnLanguage_Click" meta:resourcekey="btnLangEnglish" />
+                <asp:LinkButton Text="Hrvatski" runat="server" OnClick="btnLanguage_Click" meta:resourcekey="btnLangCroatian" />
+            </div>
+            <asp:LinkButton ID="btnLogin" Text="Prijava" runat="server" OnClick="btnLogin_Click" meta:resourcekey="btnLoginResource1" />
+            <asp:LinkButton ID="btnLogout" Text="Odjava" runat="server" OnClick="btnLogout_Click" meta:resourcekey="btnLogoutResource1" />
+
+        </div>
+    </form>
+
+    <script>
+        $(function () {
+            $("button.dropdown-btn").click(function (e) {
+                e.preventDefault();
+                console.log("This thing");
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

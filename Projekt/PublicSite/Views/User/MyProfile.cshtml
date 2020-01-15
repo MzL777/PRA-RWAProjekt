@@ -1,0 +1,94 @@
+﻿@model PublicSite.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "Moj profil";
+}
+
+<h2>Osobni podaci</h2>
+<br />
+<hr />
+<br />
+
+<div class="outer">
+    <div class="inner">
+        @Html.HiddenFor(model => model.IDKorisnik)
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Ime)
+            </dt>
+
+            <dd class="form-control">
+                @Html.DisplayFor(model => model.Ime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Prezime)
+            </dt>
+
+            <dd class="form-control">
+                @Html.DisplayFor(model => model.Prezime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd class="form-control">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Visina)
+            </dt>
+
+            <dd class="form-control">
+                @Html.DisplayFor(model => model.Visina)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Tezina)
+            </dt>
+
+            <dd class="form-control">
+                @Html.DisplayFor(model => model.Tezina)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DatumRodjenja)
+            </dt>
+
+            <dd class="form-control">
+                @Html.DisplayFor(model => model.DatumRodjenja)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SpolID)
+            </dt>
+
+            <dd class="form-control">
+                @Html.Action("GetSpol", new { id = Model.SpolID })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TipDijabetesaID)
+            </dt>
+
+            <dd class="form-control">
+                @Html.Action("GetTipDijabetesa", new { id = Model.TipDijabetesaID })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RazinaFizickeAktivnostiID)
+            </dt>
+
+            <dd class="form-control">
+                @Html.Action("GetRazinuFizickeAktivnosti", new { id = Model.RazinaFizickeAktivnostiID })
+            </dd>
+
+        </dl>
+        <br />
+        <div class="form-group">
+            @Html.ActionLink(linkText: "Uredi", actionName: "EditProfile", routeValues: new { }, htmlAttributes: new { @class = "btn btn-danger remove-link-decoration move-right button" })
+        </div>
+    </div>
+</div>

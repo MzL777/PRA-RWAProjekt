@@ -1,0 +1,256 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    margin-right: 0;
+    padding: 0px 10px;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .body-content {
+        padding: 0px 10px;
+        margin-left: 160px; /* Same as the width of the sidebar */
+    }
+}
+
+
+
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+}
+
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #818181;
+        display: block;
+    }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+    .sidenav h2 {
+        text-align: center;
+        color: red;
+    }
+
+/* Style page content */
+.main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+div.row {
+    margin: 0;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
+
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+}
+
+footer {
+    position: relative;
+    clear: both;
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: red;
+}
+
+hr {
+    border: 1px solid red;
+}
+
+.footer-textbox {
+    margin: 5px;
+}
+
+table {
+    margin: auto;
+}
+
+    table th {
+        padding: 5px;
+        background: #550000;
+        color: white;
+        font-weight: bold;
+    }
+
+    table td {
+        padding: 3px;
+        margin: auto;
+        /*color: red;*/
+    }
+
+        table td a {
+            padding: 3px;
+        }
+
+.border-bottom {
+    border-bottom: 1px solid #500;
+}
+
+.container-center {
+    width: 300px;
+    display: block;
+    margin: auto;
+    padding: 5px 0px;
+}
+
+.center {
+    text-align: center;
+}
+
+.button {
+    height: 32px;
+    width: 150px;
+}
+
+.number {
+    width: 90px;
+}
+
+.float-left {
+    margin-left: 20px;
+    float: left;
+}
+
+.padding-20 {
+    float: none;
+    display: table-cell;
+    padding: 20px;
+}
+
+.button-fill {
+    width: 100%;
+    display: block;
+    margin: 0;
+}
+
+a.ui-state-default {
+    text-decoration: none;
+    color: red;
+}
+
+a.ui-state-hover {
+    text-decoration: none;
+    background: white;
+}
+
+.ui-datepicker {
+    background: black;
+}
+
+.ui-datepicker-prev {
+    display: inline-block;
+    text-align: left;
+    width: 49%;
+    cursor: pointer;
+    text-decoration: none;
+    color: red;
+}
+
+a.ui-datepicker-next {
+    display: inline-block;
+    text-align: right;
+    width: 50%;
+    cursor: pointer;
+    text-decoration: none;
+    color: red;
+}
+
+.ui-datepicker-unselectable {
+    color: white;
+}
+
+p {
+    margin: 0;
+}
+
+.kombinacijeContainer {
+    padding-left: 40px;
+}
+
+.btn {
+    padding: 3px;
+}
+
+.remove-link-decoration {
+    text-decoration: none;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+label.control-label {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+tr td input {
+    display: inline-block;
+}
+
+.inner {
+    display: table;
+    margin: 0 auto;
+    float: none;
+    min-width: 360px;
+}
+
+.outer {
+    width: 100%;
+}
+
+ul {
+    padding: 0;
+}

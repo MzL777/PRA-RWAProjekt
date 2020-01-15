@@ -1,0 +1,253 @@
+﻿body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+}
+
+.body-content {
+    margin-left: 170px; /* Same as the width of the sidebar */
+    margin-right: 0;
+    padding: 0px 10px;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+@media screen and (min-width: 768px) {
+    .body-content {
+        padding: 0px 10px;
+        margin-left: 170px; /* Same as the width of the sidebar */
+    }
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 170px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 20px;
+    padding: 0px 10px;
+}
+
+.active {
+    background-color: red;
+    color: white;
+}
+
+.dropdown-container {
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+}
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.sidenav h2 {
+    color: red;
+}
+
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+}
+
+footer {
+    position: relative;
+    clear: both;
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: red;
+}
+
+hr {
+    border: 1px solid red;
+}
+
+.footer-textbox {
+    margin: 5px;
+}
+
+table {
+    margin: auto;
+}
+
+table th {
+    padding: 5px;
+    background: #550000;
+    color: white;
+    font-weight: bold;
+}
+
+table td {
+    padding: 3px;
+    margin: auto;
+}
+
+table td a {
+    padding: 3px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #500;
+}
+
+.container-center {
+    width: 300px;
+    display: block;
+    margin: auto;
+    padding: 5px 0px;
+}
+
+.center {
+    text-align: center;
+}
+
+.dropdown {
+    height: 26px;
+    width: 150px;
+}
+
+.number {
+    width: 90px;
+}
+
+.float-left {
+    margin-left: 20px;
+    float: left;
+}
+
+.padding-20 {
+    float: none;
+    display: table-cell;
+    padding: 20px;
+}
+
+.button-fill {
+    width: 100%;
+    display: block;
+    margin: 0;
+}
+
+table.obrokTable {
+    color: red;
+}
+
+table.obrokTable td {
+    color: red;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border: 0;
+}
+
+table.obrokTable select,
+table.obrokTable input {
+    border: 0;
+    margin: 0;
+    padding: 3px;
+    width: 170px;
+    text-align: center;
+}
+
+a.ui-state-default {
+    text-decoration: none;
+    color: red;
+}
+
+a.ui-state-hover {
+    text-decoration: none;
+    background: white;
+}
+
+.ui-datepicker {
+    background: black;
+}
+
+.ui-datepicker-prev {
+    display: inline-block;
+    text-align: left;
+    width: 49%;
+    cursor: pointer;
+    text-decoration: none;
+    color: red;
+}
+
+a.ui-datepicker-next {
+    display: inline-block;
+    text-align: right;
+    width: 50%;
+    cursor: pointer;
+    text-decoration: none;
+    color: red;
+}
+
+.ui-datepicker-unselectable {
+    color: white;
+}
+
+p {
+    margin: 0;
+}
+
+.kombinacijeContainer {
+    padding-left: 40px;
+}
+
+.btn {
+    padding: 3px;
+}
+
+.inner {
+    display: table;
+    margin: 0 auto;
+    float: none;
+    min-width: 360px;
+}
+
+.outer {
+    width: 100%;
+}

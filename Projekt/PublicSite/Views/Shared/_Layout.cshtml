@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!-- Side navigation -->
+    <div class="sidenav">
+        <div class="logo">
+            <img src="~/logo.png" alt="logo" class="logo" />
+        </div>
+        <br />
+        <h2>Food majstor</h2>
+        <br />
+        <hr />
+        @Html.ActionLink("Jelovnici", "Jelovnik", "Home")
+        @Html.ActionLink("Osobni podaci", "MyProfile", "User")
+        <hr />
+        @Html.ActionLink("Registracija", "Register", "User")
+        @Html.ActionLink("Login", "Login", "User")
+        @Html.ActionLink("Odjava", "Logout", "User")
+        <br />
+        
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+            <hr />
+            <p>&copy; Mislav Lalić, RWA&PRA projekt, Visoko Učilište Algebra, @DateTime.Now.ToShortDateString()</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

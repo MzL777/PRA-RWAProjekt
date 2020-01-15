@@ -1,0 +1,228 @@
+﻿@using DAL.Model
+
+@model PublicSite.Models.JelovnikPreGenerateData
+
+@{
+    ViewBag.Title = "Jelovnik";
+    var kombinacije = ViewBag.kombinacije as List<KombinacijaObroka>;
+    var mjerneJedinice = ViewBag.mjerneJedinice as IEnumerable<MjernaJedinica>;
+    bool? _genDisabled = (bool?)ViewBag.genDisabled;
+    bool? _saveDisabled = (bool?)ViewBag.saveDisabled;
+}
+
+<h2>Jelovnik</h2>
+<br />
+<hr />
+<br />
+
+<div class="outer">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal inner">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.BrojObroka, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.BrojObroka, selectList: new SelectList(items: kombinacije, dataValueField: "BrojObroka", dataTextField: "BrojObroka"), htmlAttributes: new { @class = "form-control dropdown" })
+                    @Html.ValidationMessageFor(model => model.BrojObroka, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Datum, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Datum, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Datum, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+
+            @if (Model != null && Model.Jelovnik != null)
+            {
+                <table class="table-striped">
+                    <tr class="center">
+                        <th>#</th>
+                        <th>Naziv obroka</th>
+                        <th>Naziv namirnica</th>
+                        <th>Količina (grama)</th>
+                        @if (mjerneJedinice != null)
+                        {
+                            foreach (var mjernaJedinica in mjerneJedinice)
+                            {
+                                <th style="text-align:center;">@mjernaJedinica.Naziv</th>
+                            }
+                        }
+
+                    </tr>
+                    @foreach (var obrok in Model.Jelovnik.Obroci)
+                    {
+                        <tr>
+                            <td>
+                                @obrok.IDUJelovniku
+                                <input name="IDObrok" value="@obrok.IDObrok" type="hidden" />
+                            </td>
+                            <td>
+                                @if (_genDisabled.HasValue && !_genDisabled.Value)
+                                {
+                                    <input id="@obrok.IDObrok" name="@obrok.IDObrok" onclick="CheckboxObrokClicked(this)" type="checkbox" checked="checked" value="@obrok.Zadrzi" />
+                                }
+                                @obrok.NazivObroka.Naziv
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    @foreach (var namirnica in obrok.Namirnice)
+                                    {
+                                        <li>
+
+                                            @if (_genDisabled.HasValue && !_genDisabled.Value)
+                                            {
+                                                <input id="@string.Concat(obrok.IDObrok, "_", namirnica.Namirnica.IDNamirnice)" name="@string.Concat(obrok.IDObrok, "_", namirnica.Namirnica.IDNamirnice)" onclick="CheckboxClicked(this)" type="checkbox" checked="checked" value="@namirnica.Zadrzi" />
+                                            }
+                                            @Html.Action("GetTipNamirnice", new { id = namirnica.Namirnica.TipNamirniceID }): @namirnica.Namirnica.Naziv
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+
+                            <td>
+                                <ul style="list-style-type: none; text-align:center;">
+                                    @foreach (var namirnica in obrok.Namirnice)
+                                    {
+                                        <li>@namirnica.Kolicina.ToString("0.##")</li>
+                                    }
+                                </ul>
+                            </td>
+                            @foreach (var mjernaJedinica in mjerneJedinice)
+                            {
+                                <td>
+                                    <ul style="list-style-type: none; text-align:center;">
+                                        @foreach (var namirnica in obrok.Namirnice)
+                                        {
+                                            <li>@Html.Action("GetKolicinaMjerneJediniceZaNamirnicu", new { n = namirnica, mj = mjernaJedinica })</li>
+                                        }
+                                    </ul>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+
+
+
+            <br />
+            @if (_genDisabled.HasValue && !_genDisabled.Value)
+            {
+                <div class="form-group">
+                        <input id="btnGeneriraj" type="submit" value="Generiraj" class="btn btn-danger button" />
+                </div>
+            }
+
+            @if (_saveDisabled.HasValue && !_saveDisabled.Value)
+            {
+                <div class="form-group">
+                        <input id="btnSpremi" type="submit" value="Spremi" class="btn btn-danger button" />
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        $("input#btnSpremi").click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("BtnSpremiClick", "AJAX")',
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $("form").submit();
+                }
+            });
+        });
+
+
+        $("input#btnGeneriraj").click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("BtnGenerirajClick", "AJAX")',
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $("form").submit();
+                }
+            });
+        });
+
+
+        $("input#Datum").change(function () {
+           $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DateChanged", "AJAX")',
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $("form").submit();
+                }
+            });
+        });
+
+
+        function CheckboxClicked(sender) {
+            var td = sender.parentElement.parentElement.parentElement;
+
+            var cb1 = $(td).find('[type=checkbox]')[0].checked;
+            var cb2 = $(td).find('[type=checkbox]')[1].checked;
+            var cb3 = $(td).find('[type=checkbox]')[2].checked;
+            
+            if (cb1 && cb2 && cb3) {
+                $($(td.parentElement).find('[type=checkbox]')[0]).prop({ indeterminate: false, checked: true });
+            }
+            else if (!cb1 && !cb2 && !cb3) {
+                $($(td.parentElement).find('[type=checkbox]')[0]).prop({ indeterminate: false, checked: false });
+            }
+            else {
+                $($(td.parentElement).find('[type=checkbox]')[0]).prop({ indeterminate: true, checked: false });
+            }
+
+            var data = JSON.stringify({ ident: sender.id, value: sender.checked });
+            console.log(data);
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ZadrziChanged", "AJAX")',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: data
+            });
+        }
+
+
+        function CheckboxObrokClicked(sender) {
+            var chkd = $(sender).is(':checked');
+
+            $(sender.parentElement.parentElement).find('[type=checkbox]').each(function (index, element) {
+                console.log(element);
+                $(element).prop('checked', chkd);
+                console.log($(element).is(':checked'));
+            });
+
+            var data = JSON.stringify({ ident: sender.id, value: sender.checked });
+            console.log(data);
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ZadrziChanged", "AJAX")',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: data
+            });
+        }
+    </script>
+}
